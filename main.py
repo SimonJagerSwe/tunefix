@@ -3,38 +3,19 @@ import argparse
 import os
 import sys
 
-# Test arguments
-# -d "C:\Users\simon\OneDrive\Dokument\Soulseek Downloads\complete\ahyonfelihufs\Awake"
-# -r "0{n} "
-# -n "0{n} - "
-# -d "C:\Users\simon\OneDrive\Dokument\Soulseek Downloads\complete\ahyonfelihufs\Awake" -r "0{n} " -n "0{n} - "
+a_dir = r"C:\Users\simon\OneDrive\Skrivbord\Musik\Chick Corea Elektric Band\1990 - Inside Out"
 
 def main():
-    parser = argparse.ArgumentParser(
-        prog="TuneFix",
-        description="This fixes the names of sound files to conform with a given standard"
-    )
-
-# Take arguments for album location
-    parser.add_argument("-d", "--directory", default=r"", help="Directory of album to fix", type=str)
-
-# Take arguments for string to replace
-# parser.add_argument("-r", default="", help="File part to replace", type=str)
-
-# Take arguments for new name
- #parser.add_argument("-n", default="", help="New file part", type=str)
-
-# Initialise args
-    args = parser.parse_args()
-    # print(dir(args))
-
-
-# Find files
-    for file in os.walk(r"C:\Users\simon\OneDrive\Dokument\Soulseek Downloads\complete\ahyonfelihufs\Awake"):
-        print(f"{file}\n")
-
-
-# Apply changes to file
+    # print(a_dir)
+    for root, dirs, files in os.walk(a_dir):
+        # if os.path.basename(root) != "modules":
+        #     continue
+        print(f"Root: {root}")
+        # print(f"Root type: {type(root)}")
+        print(f"Dirs: {dirs}")
+        # print(f"Dirs type: {type(dirs)}")
+        print(f"File: {files}")
+        # print(f"Files type: {type(files)}")
 
 
 
