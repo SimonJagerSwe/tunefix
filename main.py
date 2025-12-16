@@ -24,10 +24,8 @@ def to_replace():
 
 # Walk through directory to identify files
 def identify_files(a_dir):
-    for root, dirs, files in os.walk(a_dir):
-        # print(f"File: {files}")
-        for file in files:
-            print(file)
+    for song in os.listdir(a_dir):
+        print(song)
 
 
 
