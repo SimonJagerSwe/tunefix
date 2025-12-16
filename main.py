@@ -4,37 +4,34 @@ import os
 import sys
 
 
+dir_arg = rf""
+
 # Main function
 def main():
-    # a_dir = r"C:\Users\simon\OneDrive\Dokument\Soulseek Downloads\complete\ahyonfelihufs\Awake"
-    a_dir = rf""
-    parse_args(a_dir)
+    a_dir = parse_args(dir_arg)
     print(a_dir)
     identify_files(a_dir)
 
+
 # Parse arguments
-def parse_args(a_dir):
+def parse_args(dir_arg):
+    print(dir_arg)
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--directory", help="The directory containing the tracks you want to change the names of")
     parser.add_argument("-r", "--replace", help="Part of title to be replaced")
     # parser.add_argument("-n", "--new", help="New replacement")
     args = parser.parse_args()
-    a_dir = rf"{args.directory}"
-    print(rf"{args.directory}")
-    # print(a_dir)    
-    print(args.replace)
+    dir_arg = rf"{args.directory}"
+    print(dir_arg)    
+    # print(args.replace)
     # print(args.new)
-
-    return a_dir
-
+    return dir_arg
 
 
 # Walk through directory to identify files
 def identify_files(a_dir):
     for song in os.listdir(a_dir):
         print(song)
-
-
 
 
 # Execute main function
