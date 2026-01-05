@@ -5,12 +5,20 @@ import sys
 
 
 dir_arg = rf""
+s_list = []
+
 
 # Main function
 def main():
     a_dir = parse_args(dir_arg)
     print(a_dir)
-    identify_files(a_dir)
+    s_list = identify_files(a_dir)
+    print(s_list)
+    # print(remove_prefix(s_list))
+    trunc_list = remove_prefix(s_list)
+    # print(trunc_list)
+    fixed_list = add_prefix(trunc_list)
+    print(fixed_list)
 
 
 # Parse arguments
@@ -32,6 +40,37 @@ def parse_args(dir_arg):
 def identify_files(a_dir):
     for song in os.listdir(a_dir):
         print(song)
+        s_list.append(song)
+    return s_list
+
+
+def remove_prefix(s_list):
+    truncated_list = []
+    for tune in s_list:
+        prefix = tune[:3]
+        # print(prefix)
+        truncated_tune = tune.strip(prefix)
+        # print(truncated_tune)
+        truncated_list.append(truncated_tune)
+    # print(truncated_list)
+    return truncated_list
+
+
+def add_prefix(trunc_list):
+    n = 1
+    fixed_list = []
+    for tune in trunc_list:
+        if n < 10:
+            prefix = f"0{n}"
+        else:
+            prefix = f"{n}"
+        new_tune = f"{prefix} - {tune}"
+        print(new_tune)
+        fixed_list.append(new_tune)
+        n += 1
+    return fixed_list
+    
+    
 
 
 # Execute main function
