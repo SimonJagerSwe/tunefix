@@ -5,44 +5,53 @@ import sys
 
 
 dir_arg = rf""
+rep_arg = f""
 s_list = []
 
 
 # Main function
 def main():
-    a_dir = parse_args(dir_arg)
-    s_list = identify_files(a_dir)
-    trunc_list = remove_prefix(s_list)
-    fixed_list = add_prefix(trunc_list)
-    rename(a_dir, fixed_list)
+    args = parse_args(dir_arg)
+    d_arg = args[0]
+    p_arg = args[1]
+    print(d_arg)
+    print(p_arg)
+    s_list = identify_files(d_arg)
+    print(s_list)
+    # trunc_list = remove_prefix(s_list, rep_arg)
+    # remove_prefix(s_list, rep_arg)
+    # print(trunc_list)
+    # fixed_list = add_prefix(trunc_list)
+    # print(fixed_list)
+    # rename(a_dir, fixed_list)
     print("Renaming succesfull!")
 
 
 # Parse arguments
 def parse_args(dir_arg):
-    # print(dir_arg)
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--directory", help="The directory containing the tracks you want to change the names of")
-    parser.add_argument("-r", "--replace", help="Part of title to be replaced")
-    # parser.add_argument("-n", "--new", help="New replacement")
+    parser.add_argument("-r", "--replace", help="Final index of replacement")
     args = parser.parse_args()
     dir_arg = rf"{args.directory}"
-    # print(dir_arg)    
-    # print(args.replace)
-    # print(args.new)
-    return dir_arg
+    rep_arg = f"{args.replace}"
+    return dir_arg, rep_arg
 
 
 # Walk through directory to identify files
-def identify_files(a_dir):
-    for song in os.listdir(a_dir):
+def identify_files(d_arg):
+    for song in os.listdir(d_arg):
         print(song)
         s_list.append(song)
     return s_list
 
 
-def remove_prefix(s_list):
+def remove_prefix(s_list, rep_arg):
+    print(rep_arg)
     truncated_list = []
+    if rep_arg:
+        for tune in s_list:
+            truncated_tune = tune.strip(rep_arg)
     for tune in s_list:
         prefix = tune[:3]
         truncated_tune = tune.strip(prefix)
@@ -70,6 +79,8 @@ def rename(a_dir, fixed_list):
     n = 0
     for tune in os.listdir(a_dir):
         print(tune)
+        if tune[1] == "3":
+            os.rename(f"{a_dir}\\{tune}", f"{a_dir}\\{fixed_list[n]}3")
         os.rename(f"{a_dir}\\{tune}", f"{a_dir}\\{fixed_list[n]}")
         n += 1
     
