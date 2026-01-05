@@ -18,7 +18,7 @@ def main():
     trunc_list = remove_prefix(s_list)
     # print(trunc_list)
     fixed_list = add_prefix(trunc_list)
-    print(fixed_list)
+    rename(a_dir, fixed_list)
 
 
 # Parse arguments
@@ -69,9 +69,17 @@ def add_prefix(trunc_list):
         fixed_list.append(new_tune)
         n += 1
     return fixed_list
-    
-    
 
+
+def rename(a_dir, fixed_list):
+    print(a_dir)
+    # print(fixed_list)
+    n = 0
+    for tune in os.listdir(a_dir):
+        print(tune)
+        os.rename(f"{a_dir}\\{tune}", f"{a_dir}\\{fixed_list[n]}")
+        n += 1
+    
 
 # Execute main function
 if __name__ == "__main__":
