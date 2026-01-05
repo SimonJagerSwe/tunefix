@@ -11,14 +11,11 @@ s_list = []
 # Main function
 def main():
     a_dir = parse_args(dir_arg)
-    print(a_dir)
     s_list = identify_files(a_dir)
-    print(s_list)
-    # print(remove_prefix(s_list))
     trunc_list = remove_prefix(s_list)
-    # print(trunc_list)
     fixed_list = add_prefix(trunc_list)
     rename(a_dir, fixed_list)
+    print("Renaming succesfull!")
 
 
 # Parse arguments
@@ -48,11 +45,8 @@ def remove_prefix(s_list):
     truncated_list = []
     for tune in s_list:
         prefix = tune[:3]
-        # print(prefix)
         truncated_tune = tune.strip(prefix)
-        # print(truncated_tune)
         truncated_list.append(truncated_tune)
-    # print(truncated_list)
     return truncated_list
 
 
@@ -73,7 +67,6 @@ def add_prefix(trunc_list):
 
 def rename(a_dir, fixed_list):
     print(a_dir)
-    # print(fixed_list)
     n = 0
     for tune in os.listdir(a_dir):
         print(tune)
