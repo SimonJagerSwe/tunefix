@@ -7,6 +7,7 @@ import os
 dir_arg = rf""
 rep_arg = f""
 s_list = []
+ext_name = []
 
 
 # Main function
@@ -17,15 +18,18 @@ def main():
     print(d_arg)
     print(p_arg)
     s_list = identify_files(d_arg)
-    trunc_list = remove_prefix(s_list, p_arg)
-    if trunc_list[0][0:5] == "01 - ":
-        trunc_list
-        print(trunc_list)
-        # rename (d_arg, trunc_list)
+    print(s_list)
+    ext_name = fix_extension(s_list)
+    print(ext_name)
+    # print(s_list[0][0:5])
+    if s_list[0][0:5] == "01 - ":
+        rename(d_arg, s_list)
     else:
-        fixed_list = add_prefix(trunc_list)
-        new_list = add_prefix(fixed_list)
-        # rename(d_arg, new_list)
+        trunc_list = remove_prefix(ext_name, p_arg)
+        print(trunc_list)
+        new_list = add_prefix(trunc_list)
+        print(new_list)
+        rename(d_arg, new_list)
     print("Renaming succesfull!")
 
 
@@ -44,27 +48,38 @@ def parse_args(dir_arg):
 def identify_files(d_arg):
     for song in os.listdir(d_arg):
         print(song.title())
+        song = song.title()
         s_list.append(song)
     return s_list
 
 
-def remove_prefix(s_list, p_arg):
+def fix_extension(s_list):
+    for song in s_list:
+        song= song.split(".")
+        ext = song[1].lower()
+        song_name = f"{song[0]}.{ext}"
+        print(song_name)
+        ext_name.append(song_name)
+    return ext_name
+
+
+def remove_prefix(ext_name, p_arg):
     truncated_list = []
     if p_arg != "None":
         for tune in s_list:
             truncated_tune = tune.strip(p_arg)
             print(truncated_tune)
-            truncated_list.append(truncated_tune.title())
+            truncated_list.append(truncated_tune)
     else:
         for tune in s_list:
             prefix = tune[:3]
             truncated_tune = tune.strip(prefix)
             print(truncated_tune)
-            truncated_list.append(truncated_tune.title())
+            truncated_list.append(truncated_tune)
     return truncated_list
 
 
-def add_prefix(trunc_list):    
+def add_prefix(trunc_list):
     n = 1
     fixed_list = []
     for tune in trunc_list:
