@@ -23,7 +23,7 @@ def main():
     print(ext_name)
     # print(s_list[0][0:5])
     if s_list[0][0:5] == "01 - ":
-        rename(d_arg, s_list)
+        rename(d_arg, ext_name)
     else:
         trunc_list = remove_prefix(ext_name, p_arg)
         print(trunc_list)
