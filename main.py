@@ -19,15 +19,19 @@ def main():
     s_list = identify_files(d_arg)
     # print(s_list)
     trunc_list = remove_prefix(s_list, p_arg)
-    print(trunc_list)
-    print(trunc_list[0][0:5])
-    if trunc_list[0][0:5] != "01 - ":
-        fixed_list = add_prefix(trunc_list)
+    # print(trunc_list)
+    # print(trunc_list[0][0:5])
+    if trunc_list[0][0:5] == "01 - ":
+        trunc_list
+        print(trunc_list)
+        rename (d_arg, trunc_list)
     else:
-        fixed_list = trunc_list
-    print(trunc_list)
-    print(fixed_list)
-    # rename(d_arg, fixed_list)
+        fixed_list = add_prefix(trunc_list)
+        print(trunc_list)
+        print(fixed_list)
+        new_list = add_prefix(fixed_list)
+        print(new_list)
+        rename(d_arg, new_list)
     print("Renaming succesfull!")
 
 
@@ -45,25 +49,28 @@ def parse_args(dir_arg):
 # Walk through directory to identify files
 def identify_files(d_arg):
     for song in os.listdir(d_arg):
-        print(song)
+        print(song.title())
         s_list.append(song)
     return s_list
 
 
 def remove_prefix(s_list, p_arg):
-    print(bool(p_arg == None))
-    print(p_arg)
+    # print(bool(p_arg))
+    # print(bool(p_arg == "None"))
+    # print(type(p_arg))
+    # print(p_arg)
     truncated_list = []
-    if p_arg:
+    if p_arg != "None":
         for tune in s_list:
             truncated_tune = tune.strip(p_arg)
             print(truncated_tune)
-            truncated_list.append(truncated_tune)
+            truncated_list.append(truncated_tune.title())
     else:
         for tune in s_list:
             prefix = tune[:3]
             truncated_tune = tune.strip(prefix)
-            truncated_list.append(truncated_tune)
+            print(truncated_tune)
+            truncated_list.append(truncated_tune.title())
     return truncated_list
 
 
@@ -82,15 +89,20 @@ def add_prefix(trunc_list):
     return fixed_list
 
 
-def rename(d_arg, fixed_list):
+def rename(d_arg, new_list):
     print(d_arg)
     n = 0
     for tune in os.listdir(d_arg):
-        print(tune)
+        print(f"{tune}")
         # if tune[1] == "3":
-        #   os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{fixed_list[n]}3")
-        os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{fixed_list[n]}")
+        #     os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}3")
+        #     n += 1
+        #     continue
+        if tune[-1] != "3":
+            tune = f"{tune}3"
+        os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}")
         n += 1
+    
     
 
 # Execute main function
