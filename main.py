@@ -17,21 +17,15 @@ def main():
     print(d_arg)
     print(p_arg)
     s_list = identify_files(d_arg)
-    # print(s_list)
     trunc_list = remove_prefix(s_list, p_arg)
-    # print(trunc_list)
-    # print(trunc_list[0][0:5])
     if trunc_list[0][0:5] == "01 - ":
         trunc_list
         print(trunc_list)
-        rename (d_arg, trunc_list)
+        # rename (d_arg, trunc_list)
     else:
         fixed_list = add_prefix(trunc_list)
-        print(trunc_list)
-        print(fixed_list)
         new_list = add_prefix(fixed_list)
-        print(new_list)
-        rename(d_arg, new_list)
+        # rename(d_arg, new_list)
     print("Renaming succesfull!")
 
 
@@ -55,10 +49,6 @@ def identify_files(d_arg):
 
 
 def remove_prefix(s_list, p_arg):
-    # print(bool(p_arg))
-    # print(bool(p_arg == "None"))
-    # print(type(p_arg))
-    # print(p_arg)
     truncated_list = []
     if p_arg != "None":
         for tune in s_list:
@@ -94,10 +84,6 @@ def rename(d_arg, new_list):
     n = 0
     for tune in os.listdir(d_arg):
         print(f"{tune}")
-        # if tune[1] == "3":
-        #     os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}3")
-        #     n += 1
-        #     continue
         if tune[-1] != "3":
             tune = f"{tune}3"
         os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}")
