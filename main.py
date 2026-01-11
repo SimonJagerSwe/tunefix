@@ -1,7 +1,6 @@
 # Imports
 import argparse
 import os
-# import sys
 
 
 dir_arg = rf""
@@ -17,19 +16,26 @@ def main():
     p_arg = args[1]
     print(d_arg)
     print(p_arg)
+    print(type(p_arg))
+    if len(p_arg):
+        p_arg = int(p_arg)
+    print(p_arg)
+    print(type(p_arg))
     s_list = identify_files(d_arg)
     print(s_list)
     ext_name = fix_extension(s_list)
     print(ext_name)
-    # print(s_list[0][0:5])
+    print(s_list[0][0:5])
     if s_list[0][0:5] == "01 - ":
-        rename(d_arg, ext_name)
+        print("Song number format already valid")
+        # rename(d_arg, ext_name)
     else:
+        print("Renaming files")
         trunc_list = remove_prefix(ext_name, p_arg)
         print(trunc_list)
         new_list = add_prefix(trunc_list)
         print(new_list)
-        rename(d_arg, new_list)
+        # rename(d_arg, new_list)
     print("Renaming succesfull!")
 
 
@@ -54,10 +60,14 @@ def identify_files(d_arg):
 
 
 def fix_extension(s_list):
+    # print(s_list)
     for song in s_list:
-        song= song.split(".")
-        ext = song[1].lower()
-        song_name = f"{song[0]}.{ext}"
+        # print(song)
+        song_ext = song[-3:]
+        # print(song_ext)
+        song = song.strip(song_ext)
+        # print(song)
+        song_name = f"{song}mp3"
         print(song_name)
         ext_name.append(song_name)
     return ext_name
@@ -66,12 +76,17 @@ def fix_extension(s_list):
 def remove_prefix(ext_name, p_arg):
     truncated_list = []
     if p_arg != "None":
-        for tune in s_list:
-            truncated_tune = tune.strip(p_arg)
-            print(truncated_tune)
-            truncated_list.append(truncated_tune)
+        if int(p_arg):
+            print("p_arg is int")
+            
+
+        else:
+            for tune in ext_name:
+                truncated_tune = tune.strip(p_arg)
+                print(truncated_tune)
+                truncated_list.append(truncated_tune)
     else:
-        for tune in s_list:
+        for tune in ext_name:
             prefix = tune[:3]
             truncated_tune = tune.strip(prefix)
             print(truncated_tune)
