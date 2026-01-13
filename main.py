@@ -4,10 +4,11 @@ import os
 
 
 dir_arg = rf""
-pre_arg = 0
+pre_arg = f""
 str_arg = f""
 s_list = []
-ext_name = []
+ext_list = []
+stripped_list = []
 
 
 # Main function
@@ -19,28 +20,29 @@ def main():
     print(f"File directory: {d_arg}")
     print(f"Number of initial characters to remove: {p_arg}")
     print(f"Part of titles to remove: {s_arg}")
-    # print(type(p_arg))
-    # print(len(p_arg))
-    # if len(p_arg) == 1:
-    #     print("Removal argumet appears to be an integer")
-    #     p_arg = int(p_arg)
-    # print(p_arg)
-    # print(type(p_arg))
-    # s_list = identify_files(d_arg)
-    # print(s_list)
-    # ext_name = fix_extension(s_list)
-    # print(ext_name)
-    # print(s_list[0][0:5])
-    # if s_list[0][0:5] == "01 - ":
-    #     print("Song number format already valid")
-        # rename(d_arg, ext_name)
-    # else:
-    #     print("Renaming files")
-    #     trunc_list = remove_prefix(ext_name, p_arg)
-    #     print(trunc_list)
-    #     new_list = add_prefix(trunc_list)
-    #     print(new_list)
-        # rename(d_arg, new_list)
+    print(type(p_arg))
+    if p_arg != "None":
+        print("Removal argumet appears to be an integer")
+        p_arg = int(p_arg)
+    print(p_arg)
+    print(type(p_arg))
+    s_list = identify_files(d_arg)
+    print(s_list)
+    ext_list = fix_extension(s_list)
+    print(ext_list)
+    stripped_name = remove_string(ext_list, s_arg)
+    print(stripped_list)
+    print(s_list[0][0:5])
+    if s_list[0][0:5] == "01 - ":
+        print("Song number format already valid")
+        rename(d_arg, stripped_name)
+    else:
+        print("Renaming files")
+        trunc_list = remove_prefix(ext_list, p_arg)
+        print(trunc_list)
+        new_list = add_prefix(trunc_list)
+        print(new_list)
+        rename(d_arg, new_list)
     print("Renaming succesfull!")
 
 
@@ -73,8 +75,8 @@ def fix_extension(s_list):
         song = song.strip(song_ext)
         song_name = f"{song}mp3"
         print(song_name)
-        ext_name.append(song_name)
-    return ext_name
+        ext_list.append(song_name)
+    return ext_list
 
 
 def remove_prefix(ext_name, p_arg):
@@ -103,6 +105,16 @@ def remove_prefix(ext_name, p_arg):
             truncated_list.append(truncated_tune)
     return truncated_list
 
+
+def remove_string(ext_list, s_arg):
+    # print(ext_list)
+    print(s_arg)
+    for song in ext_list:
+        print(song)
+        stripped_song = song.replace(s_arg, "")
+        print(stripped_song)
+        stripped_list.append(stripped_song)
+    return stripped_list
 
 def add_prefix(trunc_list):
     n = 1
