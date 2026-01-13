@@ -31,7 +31,7 @@ def main():
     ext_list = fix_extension(s_list)
     print(ext_list)
     stripped_name = remove_string(ext_list, s_arg)
-    print(stripped_list)
+    print(stripped_name)
     print(s_list[0][0:5])
     if s_list[0][0:5] == "01 - ":
         print("Song number format already valid")
@@ -81,8 +81,8 @@ def fix_extension(s_list):
 
 def remove_prefix(ext_name, p_arg):
     truncated_list = []
-    print(p_arg)
-    print(type(p_arg))
+    # print(p_arg)
+    # print(type(p_arg))
     if p_arg != "None":
         if type(p_arg) == int:
             print("p_arg is int")
@@ -107,10 +107,9 @@ def remove_prefix(ext_name, p_arg):
 
 
 def remove_string(ext_list, s_arg):
-    # print(ext_list)
-    print(s_arg)
+    # print(s_arg)
     for song in ext_list:
-        print(song)
+        # print(song)
         stripped_song = song.replace(s_arg, "")
         print(stripped_song)
         stripped_list.append(stripped_song)
