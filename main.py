@@ -24,24 +24,16 @@ def main():
     if p_arg != "None":
         print("Removal argumet appears to be an integer")
         p_arg = int(p_arg)
-    print(p_arg)
-    print(type(p_arg))
     s_list = identify_files(d_arg)
-    print(s_list)
     ext_list = fix_extension(s_list)
-    print(ext_list)
     stripped_name = remove_string(ext_list, s_arg)
-    print(stripped_name)
-    print(s_list[0][0:5])
     if s_list[0][0:5] == "01 - ":
         print("Song number format already valid")
         rename(d_arg, stripped_name)
     else:
         print("Renaming files")
         trunc_list = remove_prefix(ext_list, p_arg)
-        print(trunc_list)
         new_list = add_prefix(trunc_list)
-        print(new_list)
         rename(d_arg, new_list)
     print("Renaming succesfull!")
 
@@ -62,7 +54,6 @@ def parse_args(dir_arg):
 # Walk through directory to identify files
 def identify_files(d_arg):
     for song in os.listdir(d_arg):
-        print(song.title())
         song = song.title()
         s_list.append(song)
     return s_list
@@ -74,34 +65,27 @@ def fix_extension(s_list):
         song_ext = song[-3:]
         song = song.strip(song_ext)
         song_name = f"{song}mp3"
-        print(song_name)
         ext_list.append(song_name)
     return ext_list
 
 
 def remove_prefix(ext_name, p_arg):
     truncated_list = []
-    # print(p_arg)
-    # print(type(p_arg))
     if p_arg != "None":
         if type(p_arg) == int:
             print("p_arg is int")
             for tune in ext_name:
                 prefix = tune[:p_arg + 1]
-                print(prefix)
                 truncated_tune = tune.strip(prefix)
-                print(truncated_tune)
                 truncated_list.append(truncated_tune)
         else:
             for tune in ext_name:
                 truncated_tune = tune.strip(p_arg)
-                print(truncated_tune)
                 truncated_list.append(truncated_tune)
     else:
         for tune in ext_name:
             prefix = tune[:3]
             truncated_tune = tune.strip(prefix)
-            print(truncated_tune)
             truncated_list.append(truncated_tune)
     return truncated_list
 
@@ -109,9 +93,7 @@ def remove_prefix(ext_name, p_arg):
 def remove_string(ext_list, s_arg):
     # print(s_arg)
     for song in ext_list:
-        # print(song)
         stripped_song = song.replace(s_arg, "")
-        print(stripped_song)
         stripped_list.append(stripped_song)
     return stripped_list
 
