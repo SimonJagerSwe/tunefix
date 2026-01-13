@@ -4,7 +4,8 @@ import os
 
 
 dir_arg = rf""
-rep_arg = f""
+pre_arg = 0
+str_arg = f""
 s_list = []
 ext_name = []
 
@@ -14,27 +15,31 @@ def main():
     args = parse_args(dir_arg)
     d_arg = args[0]
     p_arg = args[1]
-    print(d_arg)
-    print(p_arg)
-    print(type(p_arg))
-    if len(p_arg):
-        p_arg = int(p_arg)
-    print(p_arg)
-    print(type(p_arg))
-    s_list = identify_files(d_arg)
-    print(s_list)
-    ext_name = fix_extension(s_list)
-    print(ext_name)
-    print(s_list[0][0:5])
-    if s_list[0][0:5] == "01 - ":
-        print("Song number format already valid")
+    s_arg = args[2]
+    print(f"File directory: {d_arg}")
+    print(f"Number of initial characters to remove: {p_arg}")
+    print(f"Part of titles to remove: {s_arg}")
+    # print(type(p_arg))
+    # print(len(p_arg))
+    # if len(p_arg) == 1:
+    #     print("Removal argumet appears to be an integer")
+    #     p_arg = int(p_arg)
+    # print(p_arg)
+    # print(type(p_arg))
+    # s_list = identify_files(d_arg)
+    # print(s_list)
+    # ext_name = fix_extension(s_list)
+    # print(ext_name)
+    # print(s_list[0][0:5])
+    # if s_list[0][0:5] == "01 - ":
+    #     print("Song number format already valid")
         # rename(d_arg, ext_name)
-    else:
-        print("Renaming files")
-        trunc_list = remove_prefix(ext_name, p_arg)
-        print(trunc_list)
-        new_list = add_prefix(trunc_list)
-        print(new_list)
+    # else:
+    #     print("Renaming files")
+    #     trunc_list = remove_prefix(ext_name, p_arg)
+    #     print(trunc_list)
+    #     new_list = add_prefix(trunc_list)
+    #     print(new_list)
         # rename(d_arg, new_list)
     print("Renaming succesfull!")
 
@@ -43,11 +48,13 @@ def main():
 def parse_args(dir_arg):
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--directory", help="The directory containing the tracks you want to change the names of")
-    parser.add_argument("-r", "--replace", help="Final index of replacement")
+    parser.add_argument("-p", "--prefix", help="Number of initial characters to remove")
+    parser.add_argument("-s", "--string_strip", help="Part to strip")
     args = parser.parse_args()
     dir_arg = rf"{args.directory}"
-    rep_arg = f"{args.replace}"
-    return dir_arg, rep_arg
+    pre_arg = f"{args.prefix}"
+    str_arg = f"{args.string_strip}"
+    return dir_arg, pre_arg, str_arg
 
 
 # Walk through directory to identify files
@@ -62,11 +69,8 @@ def identify_files(d_arg):
 def fix_extension(s_list):
     # print(s_list)
     for song in s_list:
-        # print(song)
         song_ext = song[-3:]
-        # print(song_ext)
         song = song.strip(song_ext)
-        # print(song)
         song_name = f"{song}mp3"
         print(song_name)
         ext_name.append(song_name)
@@ -75,11 +79,17 @@ def fix_extension(s_list):
 
 def remove_prefix(ext_name, p_arg):
     truncated_list = []
+    print(p_arg)
+    print(type(p_arg))
     if p_arg != "None":
-        if int(p_arg):
+        if type(p_arg) == int:
             print("p_arg is int")
-            
-
+            for tune in ext_name:
+                prefix = tune[:p_arg + 1]
+                print(prefix)
+                truncated_tune = tune.strip(prefix)
+                print(truncated_tune)
+                truncated_list.append(truncated_tune)
         else:
             for tune in ext_name:
                 truncated_tune = tune.strip(p_arg)
