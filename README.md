@@ -8,7 +8,7 @@ Given the provided example file name: '[01] - Artist Name - Song Name', and our 
 
 python main.py -d '/.../artist/album' -p 7 -s 'Artist Name - '
 
-will yield the following result:
+will yield the following result:<br>
 '-d "/.../artist/album"' will provide the location of all the files<br>
 '-p 7' will select the undesired enumeration of "[01] - ", leaving us with 'Artist Name - Song Name'<br>
 '-s "Artist Name - "' will strip everything down to just the song name<br><br>
