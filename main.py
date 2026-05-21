@@ -119,7 +119,7 @@ def add_prefix(trunc_list):
         else:
             prefix = f"{n}"
 
-        if tune[:2] == prefix:
+        if tune[:2] == prefix and tune[2:5] == " - ":
             print(tune)
             fixed_list.append(tune)
         else:
