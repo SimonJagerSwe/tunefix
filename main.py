@@ -103,8 +103,8 @@ def remove_string(song_list, s_arg):
     return stripped_list
 
 
-# Possible future function to take other file formats
-def fix_extension(s_list):
+# Possible future function to take other file formats NOTE: DO NOT USE THIS TO MODIFY EXISTING FILE TYPE
+def fix_extension(s_list, e_arg):
     pass
 
 
@@ -118,9 +118,14 @@ def add_prefix(trunc_list):
             prefix = f"0{n}"
         else:
             prefix = f"{n}"
-        new_tune = f"{prefix} - {tune}"
-        print(new_tune)
-        fixed_list.append(new_tune)
+
+        if tune[:2] == prefix:
+            print(tune)
+            fixed_list.append(tune)
+        else:
+            new_tune = f"{prefix} - {tune}"
+            print(new_tune)
+            fixed_list.append(new_tune)
         n += 1
     return fixed_list
 
@@ -130,7 +135,6 @@ def rename(d_arg, new_list):
     print(d_arg)
     n = 0
     for tune in os.listdir(d_arg):
-        # print(f"{tune}")
         os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}")
         n += 1   
 
