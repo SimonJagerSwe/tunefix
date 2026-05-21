@@ -44,6 +44,7 @@ def main():
         print("No string for stripping found")
 
     fixed_list = add_prefix(initial_strip)
+    print(fixed_list)
 
 
 
@@ -96,8 +97,7 @@ def fix_extension(s_list):
 
 def add_prefix(trunc_list):
     print(trunc_list)
-
-'''    n = 1
+    n = 1
     fixed_list = []
     for tune in trunc_list:
         if n < 10:
@@ -110,7 +110,7 @@ def add_prefix(trunc_list):
         n += 1
     return fixed_list
 
-
+'''
 def rename(d_arg, new_list):
     print(d_arg)
     n = 0
