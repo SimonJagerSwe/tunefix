@@ -13,6 +13,7 @@ stripped_list = []
 
 # Main function
 def main():
+    # Define and print cmd arguments
     args = parse_args(dir_arg)
     d_arg = args[0]
     p_arg = args[1]
@@ -23,8 +24,8 @@ def main():
     print(type(p_arg))
     print(type(s_arg))
 
+    # List all songs in 
     s_list = identify_files(d_arg)
-    # print(s_list)
 
     if p_arg != "None":
         print("Removal argumet appears to be an integer")
@@ -85,7 +86,6 @@ def remove_string(song_list, s_arg):
 
 
 def fix_extension(s_list):
-    # print(s_list)
     for song in s_list:
         song_ext = song[-3:]
         song = song.strip(song_ext)
