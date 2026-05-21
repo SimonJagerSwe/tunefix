@@ -15,7 +15,7 @@ will yield the following result:<br>
 The script will then enumerate the songs based on the order in the directory, so some form of original enumeration ("Artist Name - Track Number - Song Name", "[Track Number] - Artist Name - Song Name", "Track Number - Song Name" etc.) will be needed to begin with, otherwise songs will be enumerated in alphabetical order.<br><br>
 The final result will then be:
 <br>
-01 - First Song
-02 - Second Song
+01 - First Song<br>
+02 - Second Song<br>
 03 - Third Song<br>
 etc.
