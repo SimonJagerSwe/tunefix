@@ -50,7 +50,7 @@ def parse_args(dir_arg):
     str_arg = f"{args.string_strip}"
     return dir_arg, pre_arg, str_arg
 
-
+'''
 # Walk through directory to identify files
 def identify_files(d_arg):
     for song in os.listdir(d_arg):
@@ -122,9 +122,9 @@ def rename(d_arg, new_list):
             os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}3")
             continue
         os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}")
-        n += 1
-    
-    
+        n += 1   
+'''
+
 
 # Execute main function
 if __name__ == "__main__":
