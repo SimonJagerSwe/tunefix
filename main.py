@@ -29,6 +29,8 @@ def main():
         print("No removal initial removal argument detected")
     if s_arg != "None":
         print(f"Running initial stripper with: '{s_arg}'")
+    else:
+        print("No string for stripping found")
     s_list = identify_files(d_arg)
     print(s_list)
     # ext_list = fix_extension(s_list)
