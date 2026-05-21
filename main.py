@@ -21,21 +21,21 @@ def main():
     print(f"Number of initial characters to remove: {p_arg}")
     print(f"Part of titles to remove: {s_arg}")
     print(type(p_arg))
-    if p_arg != "None":
-        print("Removal argumet appears to be an integer")
-        p_arg = int(p_arg)
-    s_list = identify_files(d_arg)
-    ext_list = fix_extension(s_list)
-    stripped_name = remove_string(ext_list, s_arg)
-    if s_list[0][0:5] == "01 - ":
-        print("Song number format already valid")
-        rename(d_arg, stripped_name)
-    else:
-        print("Renaming files")
-        trunc_list = remove_prefix(ext_list, p_arg)
-        new_list = add_prefix(trunc_list)
-        rename(d_arg, new_list)
-    print("Renaming succesfull!")
+    # if p_arg != "None":
+    #     print("Removal argumet appears to be an integer")
+    #     p_arg = int(p_arg)
+    # s_list = identify_files(d_arg)
+    # ext_list = fix_extension(s_list)
+    # stripped_name = remove_string(ext_list, s_arg)
+    # if s_list[0][0:5] == "01 - ":
+    #     print("Song number format already valid")
+    #     rename(d_arg, stripped_name)
+    # else:
+    #     print("Renaming files")
+    #     trunc_list = remove_prefix(ext_list, p_arg)
+    #     new_list = add_prefix(trunc_list)
+    #     rename(d_arg, new_list)
+    # print("Renaming succesfull!")
 
 
 # Parse arguments
@@ -93,7 +93,7 @@ def remove_prefix(ext_name, p_arg):
 def remove_string(ext_list, s_arg):
     # print(s_arg)
     for song in ext_list:
-        stripped_song = song.replace(s_arg, "")
+        stripped_song = song.strip(s_arg)
         stripped_list.append(stripped_song)
     return stripped_list
 
@@ -118,7 +118,9 @@ def rename(d_arg, new_list):
     for tune in os.listdir(d_arg):
         print(f"{tune}")
         if tune[-1] != "3":
-            tune = f"{tune}3"
+            # tune = f"{tune}3"
+            os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}3")
+            continue
         os.rename(f"{d_arg}\\{tune}", f"{d_arg}\\{new_list[n]}")
         n += 1
     
