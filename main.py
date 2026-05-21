@@ -24,20 +24,20 @@ def main():
     print(type(s_arg))
 
     s_list = identify_files(d_arg)
-    print(s_list)
+    # print(s_list)
 
     if p_arg != "None":
         print("Removal argumet appears to be an integer")
         p_arg = int(p_arg)
         print(p_arg)
-        # new_list = remove_prefix(s_list, p_arg)
+        new_list = remove_prefix(s_list, p_arg)
         # print(new_list)
     else:
         print("No removal initial removal argument detected")
 
     if s_arg != "None":
         print(f"Running initial stripper with: '{s_arg}'")
-        # initial_strip = remove_string(s_list, s_arg)
+        initial_strip = remove_string(new_list, s_arg)
         # print(initial_strip)
     else:
         print("No string for stripping found")
@@ -77,30 +77,15 @@ def identify_files(d_arg):
         s_list.append(song)
     return s_list
 
-'''
 def remove_prefix(ext_list, p_arg):
     truncated_list = []
-    print(ext_list, p_arg)
-    if p_arg != "None":
-        if type(p_arg) == int:
-            print("p_arg is int")
-            for tune in ext_name:
-                prefix = tune[:p_arg + 1]
-                truncated_tune = tune.strip(prefix)
-                truncated_list.append(truncated_tune)
-        else:
-            for tune in ext_name:
-                truncated_tune = tune.strip(p_arg)
-                truncated_list.append(truncated_tune)
-    else:
-        for tune in ext_name:
-            prefix = tune[:3]
-            truncated_tune = tune.strip(prefix)
-            truncated_list.append(truncated_tune)
+    for song in ext_list:
+        truncated_song = song[p_arg:]
+        print(truncated_song)
+        truncated_list.append(truncated_song)
     return truncated_list
 
 
-'''
 def remove_string(song_list, s_arg):
     print(f"To be removed from the file names: '{s_arg}'")
     for song in song_list:
@@ -109,7 +94,7 @@ def remove_string(song_list, s_arg):
         stripped_list.append(stripped_song)
     return stripped_list
 
-'''
+
 def fix_extension(s_list):
     # print(s_list)
     for song in s_list:
@@ -119,7 +104,7 @@ def fix_extension(s_list):
         ext_list.append(song_name)
     return ext_list
 
-    
+'''    
 def add_prefix(trunc_list):
     n = 1
     fixed_list = []
