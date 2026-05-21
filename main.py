@@ -21,20 +21,29 @@ def main():
     print(f"Number of initial characters to remove: {p_arg}")
     print(f"Part of titles to remove: {s_arg}")
     print(type(p_arg))
+    print(type(s_arg))
+
+    s_list = identify_files(d_arg)
+    print(s_list)
+
     if p_arg != "None":
         print("Removal argumet appears to be an integer")
         p_arg = int(p_arg)
         print(p_arg)
+        # new_list = remove_prefix(s_list, p_arg)
+        # print(new_list)
     else:
         print("No removal initial removal argument detected")
+
     if s_arg != "None":
         print(f"Running initial stripper with: '{s_arg}'")
+        # initial_strip = remove_string(s_list, s_arg)
+        # print(initial_strip)
     else:
         print("No string for stripping found")
-    s_list = identify_files(d_arg)
-    print(s_list)
-    # ext_list = fix_extension(s_list)
-    # stripped_name = remove_string(ext_list, s_arg)
+
+    
+
     # if s_list[0][0:5] == "01 - ":
     #     print("Song number format already valid")
     #     rename(d_arg, stripped_name)
@@ -43,6 +52,8 @@ def main():
     #     trunc_list = remove_prefix(ext_list, p_arg)
     #     new_list = add_prefix(trunc_list)
     #     rename(d_arg, new_list)
+    # ext_list = fix_extension(s_list)
+    # stripped_name = remove_string(ext_list, s_arg)
     # print("Renaming succesfull!")
 
 
@@ -59,7 +70,7 @@ def parse_args(dir_arg):
     return dir_arg, pre_arg, str_arg
 
 
-# Walk through directory to identify files
+# Walk through directory to identify files and add them to a list
 def identify_files(d_arg):
     for song in os.listdir(d_arg):
         song = song.title()
@@ -67,18 +78,9 @@ def identify_files(d_arg):
     return s_list
 
 '''
-def fix_extension(s_list):
-    # print(s_list)
-    for song in s_list:
-        song_ext = song[-3:]
-        song = song.strip(song_ext)
-        song_name = f"{song}mp3"
-        ext_list.append(song_name)
-    return ext_list
-'''
-
-def remove_prefix(ext_name, p_arg):
+def remove_prefix(ext_list, p_arg):
     truncated_list = []
+    print(ext_list, p_arg)
     if p_arg != "None":
         if type(p_arg) == int:
             print("p_arg is int")
@@ -97,14 +99,27 @@ def remove_prefix(ext_name, p_arg):
             truncated_list.append(truncated_tune)
     return truncated_list
 
+
 '''
-def remove_string(ext_list, s_arg):
-    # print(s_arg)
-    for song in ext_list:
-        stripped_song = song.strip(s_arg)
+def remove_string(song_list, s_arg):
+    print(f"To be removed from the file names: '{s_arg}'")
+    for song in song_list:
+        stripped_song = song.replace(s_arg, "")
+        print(stripped_song)
         stripped_list.append(stripped_song)
     return stripped_list
 
+'''
+def fix_extension(s_list):
+    # print(s_list)
+    for song in s_list:
+        song_ext = song[-3:]
+        song = song.strip(song_ext)
+        song_name = f"{song}mp3"
+        ext_list.append(song_name)
+    return ext_list
+
+    
 def add_prefix(trunc_list):
     n = 1
     fixed_list = []
