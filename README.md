@@ -1,6 +1,6 @@
 # File renamer
 ## This script contains three functions and takes up to three arguments:
-### "-d" is the path to the directory containing the files to be renamed, takes a string.
+### "-d" is the path to the directory containing the files to be renamed, takes a string. THIS ARGUMENT IS MANDATORY
 ### "-p" is the prefix you want to remove (for instance other enumeration types), takes an integer representing how many characters will be stripped from the start of the file name.
 ### "-s" is a string to be stripped from anywhere in the file name.
 ## Usage example: 

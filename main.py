@@ -1,6 +1,7 @@
 # Imports
 import argparse
 import os
+import sys
 
 dir_arg = rf""
 pre_arg = f""
@@ -20,9 +21,13 @@ def main():
     print(f"File directory: {d_arg}")
     print(f"Number of initial characters to remove: {p_arg}")
     print(f"Part of titles to remove: {s_arg}")
-    print(type(p_arg))
-    print(type(s_arg))
 
+    # Check if directory argument has been provided, else close program
+    if d_arg == "None":
+        print("No file directory provided")
+        print("Terminating program...")
+        sys.exit()
+        
     # List all songs in 
     s_list = identify_files(d_arg)
 
