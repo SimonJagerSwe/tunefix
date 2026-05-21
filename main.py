@@ -42,19 +42,8 @@ def main():
     else:
         print("No string for stripping found")
 
-    
+    fixed_list = add_prefix(initial_strip)
 
-    # if s_list[0][0:5] == "01 - ":
-    #     print("Song number format already valid")
-    #     rename(d_arg, stripped_name)
-    # else:
-    #     print("Renaming files")
-    #     trunc_list = remove_prefix(ext_list, p_arg)
-    #     new_list = add_prefix(trunc_list)
-    #     rename(d_arg, new_list)
-    # ext_list = fix_extension(s_list)
-    # stripped_name = remove_string(ext_list, s_arg)
-    # print("Renaming succesfull!")
 
 
 # Parse arguments
@@ -104,9 +93,11 @@ def fix_extension(s_list):
         ext_list.append(song_name)
     return ext_list
 
-'''    
+
 def add_prefix(trunc_list):
-    n = 1
+    print(trunc_list)
+
+'''    n = 1
     fixed_list = []
     for tune in trunc_list:
         if n < 10:
